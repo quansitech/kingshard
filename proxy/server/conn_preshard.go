@@ -453,7 +453,7 @@ func (c *ClientConn) handleShowColumns(sql string, tokens []string,
 			strings.ToLower(tokens[i]) == mysql.TK_STR_COLUMNS) &&
 			i+2 < tokensLen {
 			if strings.ToLower(tokens[i+1]) == mysql.TK_STR_FROM {
-				tableName := strings.Trim(tokens[i+2], "`")
+				tableName := strings.ReplaceAll(tokens[i+2], "`", "")
 				//get the ruleDB
 				if i+4 < tokensLen && strings.ToLower(tokens[i+1]) == mysql.TK_STR_FROM {
 					ruleDB = strings.Trim(tokens[i+4], "`")
